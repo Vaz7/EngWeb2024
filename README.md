@@ -9,4 +9,4 @@ UC do 3º ano de Engenharia informática na Universidado do Minho
 
 **Email:** a95533@alunos.uminho.pt
 
-**Fotografia:** ![Foto](./eu.png)
+**Fotografia:** <img src='eu.png' width='250'>
