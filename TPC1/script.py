@@ -108,25 +108,38 @@ def buildContentPage(rua):
     #as casas ainda nao esta direito
 
     #escrever casas
-    for casa in root.findall('.//lista-casas/casa'):
-        num = casa.find("número")
-        enfiteuta = casa.find("enfiteuta")
-        foro = casa.find("foro")
-        html += f'<li>Casa número: {num.text}</li>'
-        html += f'enfiteuta: {enfiteuta.text}' if enfiteuta is not None else ''
+    for casa in root.findall('.//corpo/lista-casas/casa'):
+        num = casa.find("número").text
+        enfiteuta = casa.find("enfiteuta").text if casa.find("enfiteuta") is not None else ""
+        foro = casa.find("foro").text if casa.find("foro") is not None else ""
+
+        html += f'<li>Casa número: {num}</li>'
+        html += f'enfiteuta: {enfiteuta}' if enfiteuta else ''
         html += f'<br>'
-        html += f'foro: {foro.text}' if foro is not None else ''
+        html += f'foro: {foro}' if foro else ''
 
         desc = casa.find('.//desc')
         if desc is not None:
-            if desc.find('para') is not None:
-                print(desc.find('para').text)
-            text = ''.join([
-                para.text or '',
-                ''.join([f'<b>{data.text}</b>{data.tail}' for data in desc.findall('.//data')]),
-                ''.join([f'<b>{lugar.text}</b>{lugar.tail}' for lugar in para.findall('.//lugar')]),
-            ])
-            html += f'<p>{text}</p>'
+            for para in desc.findall('.//para'):
+                # Initialize the text content for the current <para> element
+                para_text = ''
+
+                # Handle the text content before the first nested tag (if any)
+                if para.text:
+                    para_text += f'{para.text.strip()} '
+
+                # Combine the text content with all nested tags in the correct order
+                for part in para:
+                    if part.tag == 'lugar':
+                        para_text += f'<b>{part.text}</b>{part.tail}'
+                    elif part.tag == 'entidade':
+                        para_text += f'<it>{part.text}</it>{part.tail}'
+                    elif part.tag == 'data':
+                        para_text += f'<it>{part.text}</it>{part.tail}'
+
+                html += f'<p>{para_text}</p>'
+        else:
+            html += "<p>No description available.</p>"
 
     html += "</ul>"
 
