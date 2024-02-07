@@ -39,9 +39,15 @@ def buildIndexPage():
     file_names = list_files_in_folder(folder_path)
 
     if file_names is not None:
-        file_names_without_prefix = [pattern.sub('', name) for name in file_names]
-        for file_name in file_names_without_prefix:
-            indexhtml += f'<li><a href="{file_name}.html">{file_name}</a></li>'
+        for file_name in file_names:
+            tree = ET.parse(f'{folder_path}/{file_name}')
+            root = tree.getroot()
+            nome_tag = root.find('.//meta/nome')  # Find the <nome> tag inside the <meta> tag
+            if nome_tag is not None:
+                nome = nome_tag.text
+                nomeTrimmed = pattern.sub('',file_name)
+                # Do whatever processing you need with the nome value
+                indexhtml += f'<li><a href="{nomeTrimmed}.html">{nome}</a></li>'
     indexhtml += '</body></html>'
 
     with open("html/index.html", "w", encoding="utf-8") as output_file:
@@ -142,16 +148,6 @@ def buildContentPage(rua):
             html += "<p>No description available.</p>"
 
     html += "</ul>"
-
-
-
-
-
-
-
-
-
-
 
 
     html += '</body></html>'
