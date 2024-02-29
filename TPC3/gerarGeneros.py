@@ -13,16 +13,16 @@ for entry in data["filmes"]:
         filmeID = entry.get("id")
         
         if genero in filmesEmGeneros:
-            filmesEmGeneros[genero].append(filmeID)
+            filmesEmGeneros[genero].append(filmeID+ ":" + entry.get("title"))
         else:
             filmesEmGeneros[genero] = []
-            filmesEmGeneros[genero].append(filmeID)
+            filmesEmGeneros[genero].append(filmeID+ ":" + entry.get("title"))
 
 total_entries = len(filmesEmGeneros)
 current_entry = 0
 
 # Write each item in the dictionary as a separate entry in the JSON file
-with open("completo.json", 'a') as json_file:
+with open("generos.json", 'w') as json_file:
     
     json_file.write('"generos":[')
     for key, value in filmesEmGeneros.items():

@@ -43,9 +43,10 @@ function genAtor(ator){
     
                 const filmes = ator[Object.keys(ator)[0]];
                 filmes.forEach((filme) => {
+                    let arr = filme.split(":")
                     pagHTML += `
                         <tr>
-                            <td><a href='/filmes/${filme}'>${filme}</a></td>
+                            <td><a href='/filmes/${arr[0]}'>${arr[1]}</a></td>
                         </tr>`;
     });
     
@@ -134,9 +135,10 @@ function genGenero(genero) {
     
     const filmes = genero[Object.keys(genero)[0]];
     filmes.forEach((filme) => {
+        let arr = filme.split(":")
         pagHTML += `
                         <tr>
-                            <td><a href='/filmes/${filme}'>${filme}</a></td>
+                            <td><a href='/filmes/${arr[0]}'>${arr[1]}</a></td>
                         </tr>`;
     });
     
