@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .w3-card4
+    header.w3-container.w3-pink
+      h1= title
+        a.w3-button.w3-round.w3-grey(href="/compositores/registo") +
+        a.w3-button.w3-round.w3-grey(href="/") back
+    .w3-container 
+      table.w3-table-all 
+        tr 
+            th Id 
+            th Nome 
+            th Período 
+            th Actions 
+        each comp in lista 
+            tr 
+                td
+                  a(href="/compositores/" + comp._id) #{comp._id}
+                td=comp.nome 
+                td
+                  a(href="/periodos/" + comp.periodo) #{comp.periodo}
+                td 
+                    a.w3-button.w3-blue(href="compositores/edit/" + comp._id) Editar 
+                    a.w3-button.w3-pink(href="compositores/delete/" + comp._id) Apagar
+
+    footer.w3-container.w3-pink 
+      address Gerado por EngWeb2024 em #{data}

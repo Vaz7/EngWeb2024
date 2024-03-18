@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .w3-card4
+    header.w3-container.w3-pink
+      h1= title
+    
+    form.w3-container(method="POST")
+        fieldset
+            legend Metadados
+            label Id</label>
+            input.w3-input.w3-round(type="text" name="id")
+            label Nome
+            input.w3-input.w3-round(type="text" name="nome")
+            label Biografia
+            input.w3-input.w3-round(type="text" name="bio")
+            label Data Nascimento
+            input.w3-input.w3-round(type="date" name="dataNasc")
+            label Data Obito
+            input.w3-input.w3-round(type="date" name="dataObito")
+            label Período
+            input.w3-input.w3-round(type="text" name="periodo")
+
+        button.w3-btn.w3-purple.w3-mb-2(type="submit") Registar
+             
+      
+    footer.w3-container.w3-pink 
+      address Gerado por EngWeb2024 em #{data}
+
+
+
+
