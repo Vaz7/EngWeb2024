@@ -4,6 +4,8 @@ var path = require('path');
 var logger = require('morgan');
 
 var pessoasRouter = require('./routes/pessoas');
+var modalidadesRouter = require('./routes/modalidades');
+
 var mongoose = require('mongoose')
 
 var mongoDB = 'mongodb://127.0.0.1/dataset'
@@ -28,6 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', pessoasRouter);
+app.use('/modalidades', modalidadesRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

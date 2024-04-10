@@ -1,5 +1,4 @@
-{
-  "pessoas": [
+[
     {
       "nome": "Diogo Alexandre Fadigas",
       "idade": 36,
@@ -101206,4 +101205,3 @@
       }
     }
   ]
-}

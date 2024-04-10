@@ -3,11 +3,14 @@ var router = express.Router();
 var Pessoa = require("../controllers/pessoa")
 
 
-router.get('/pessoas',function(req,res){
-  Pessoa.list()
-  .then(data => res.jsonp(data))
-  .catch(erro => res.jsonp(erro))
-})
+router.get('/pessoas', function(req, res) {
+    Pessoa.list()
+      .then(data => {
+        res.jsonp(data); // Sending data directly without wrapping it
+      })
+      .catch(erro => res.jsonp({ error: erro })); // Handling errors, if any
+});
+
 
 router.post('/pessoas', function(req, res) {
   // Extract data for new Pessoa from request body

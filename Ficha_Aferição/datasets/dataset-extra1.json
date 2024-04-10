@@ -1,5 +1,4 @@
-{
-  "pessoas": [
+[
     {
       "nome": "Neyanne Sampaio",
       "idade": 47,
@@ -101537,4 +101536,3 @@
       }
     }
   ]
-}
