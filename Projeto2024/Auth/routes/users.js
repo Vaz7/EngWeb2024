@@ -152,7 +152,6 @@ router.get("/login/facebook/callback", function (req, res, next) {
 
   router.get('/:id/favoritos', auth.verificaAcesso, async function(req, res) {
     const userId = req.params.id;
-    console.log("123123")
     
     try {
       const favoritos = await User.getFavoritos(userId);

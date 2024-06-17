@@ -25,6 +25,7 @@ router.get('/',Auth.verificaAutenticacao,function(req,res,next){
 
 router.get('/logout', function (req, res, next) {
   res.clearCookie('token')
+  res.clearCookie('userId')
   res.redirect('/login')
 })
 
@@ -79,7 +80,7 @@ router.post('/registar', async function(req, res, next) {
     const response = await axios.post('http://acordaosauth:7777/users/registar', signupData);
     let error = response.data.error;
 
-    if (error) { // Se a autenticação falhou.
+    if (error) {
       let warning;
       if (error.name == "UserExistsError") {
         warning = "Já existe um utilizador com este email associado.";
@@ -90,8 +91,14 @@ router.post('/registar', async function(req, res, next) {
       }
       var date = new Date().toISOString().substring(0, 19);
       res.render('registar', { warning: warning, d: date });
-    } else { // Se a autenticaçao correu bem, cola o token de auth nas cookies e direciona o user para a home.
-      res.cookie('token', response.data.token);
+    } else {
+      const token = response.data.token;
+      res.cookie('token', token);
+
+      const decoded = jwt.decode(token);
+      const userId = decoded._id;
+      res.cookie('userId', userId);
+
       res.redirect('/');
     }
   } catch (err) {
@@ -99,6 +106,7 @@ router.post('/registar', async function(req, res, next) {
     res.render('registar', { warning: "Ocorreu um erro no serviço da criação da conta.", d: date });
   }
 });
+
 
 
 
