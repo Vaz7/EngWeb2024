@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    link(rel='stylesheet', href='/stylesheets/login.css')
+
+    div(class="w3-container w3-display-middle w3-card-4 w3-light-grey w3-padding-16 w3-round-large" style="max-width: 400px;")
+        h2(class="w3-center") Criar Conta
+        form(id="login-form" action="/registar" method="post")
+            p
+                .input-text(title="Nome de Utilizador")
+                    i.fa-solid.fa-user.fa-lg
+                    input(name="username" type="text" placeholder="Username" autofocus required)
+            p
+                .input-text(title="Nome")
+                    i.fa-solid.fa-address-card.fa-lg
+                    input(name="name" type="text" placeholder="Nome" required)
+            p
+                .input-text(title="Email")
+                    i.fa-solid.fa-envelope.fa-lg
+                    input(name="email" type="text" placeholder="Email" required)
+            p
+                .input-text(title="Password")
+                    i.fa-solid.fa-lock.fa-lg
+                    input.password(name="password" type="password" placeholder="Password" required)
+            p
+                button.w3-button.w3-pink.w3-round.w3-hover-margin(type="submit") Criar conta
+
+        div(class="w3-center w3-margin-top" id="message" class=(warning ? '' : 'hidden'))
+            if warning
+                p= warning
+            else
+                p 
+
+        div(class="w3-center")
+            p Já possui conta? 
+                a(href="/login") Login
